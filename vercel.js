@@ -1,14 +1,15 @@
 {
-    "builds": [
-        {
-            "src": "dist/main.js",
-            "use": "@vercel/nest"
-        }
-    ],
-        "routes": [
+    "version": 2,
+        "builds": [
             {
-                "src": "/(.*)",
-                "dest": "dist/main.js"
+                "src": "dist/main.js",
+                "use": "@vercel/node"
             }
-        ]
+        ],
+            "routes": [
+                {
+                    "src": "/(.*)",
+                    "dest": "dist/main.js"
+                }
+            ]
 }
