@@ -26,13 +26,20 @@ export class QuotesService {
         return quote;
     }
 
-    async getRandomQuotes(limit?: number) {
-        return this.quotesRepo
+    async getRandomQuotes(limit: number, tags: string[]) {
+        const qb = this.quotesRepo
             .createQueryBuilder('quote')
-            .orderBy('RANDOM()')
-            .take(limit || 1)
-            .getMany();
+            .orderBy('RANDOM()') // use RAND() if MySQL
+            .take(limit);
+
+        if (tags.length > 0) {
+            qb.leftJoin('quote.tags', 'tag')
+                .where('tag.slug IN (:...tags)', { tags });
+        }
+
+        return qb.getMany();
     }
+
 
     async getQuotesByTag(slug: string) {
         return this.quotesRepo
