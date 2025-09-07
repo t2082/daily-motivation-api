@@ -1,4 +1,4 @@
-import { Entity, PrimaryGeneratedColumn, Column, ManyToMany } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from 'typeorm';
 import { Quote } from './quote';
 
 @Entity('tags')
@@ -12,6 +12,6 @@ export class Tag {
   @Column({ unique: true })
   slug: string;
 
-  @ManyToMany(() => Quote, (quote) => quote.tags)
+  @OneToMany(() => Quote, (quote) => quote.tag)
   quotes: Quote[];
 }

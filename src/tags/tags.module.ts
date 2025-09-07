@@ -9,4 +9,4 @@ import { TagsController } from './tags.controller';
   providers: [TagsService],
   controllers: [TagsController],
 })
-export class TagsModule {}
+export class TagsModule { }
